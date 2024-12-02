@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pyramakerz_task_f/modules/opjects_detection/cubit/objects_detection_cubit.dart';
 import 'package:pyramakerz_task_f/modules/opjects_detection/cubit/objects_detection_state.dart';
-import 'package:tflite/tflite.dart';
 
-import '../../../main.dart';
 
 class ObjectsDetectionView extends StatelessWidget {
   const ObjectsDetectionView({super.key});
