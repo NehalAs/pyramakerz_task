@@ -22,7 +22,9 @@ class ObjectsDetectionView extends StatelessWidget {
                 objectsDetectionState.imageCamera != null
                     ? CameraPreview(objectsDetectionState.cameraController)
                     : const Center(child: CircularProgressIndicator()),
-                Center(child: Text(objectsDetectionState.result),)
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text(objectsDetectionState.result))
               ],
             ),
           );

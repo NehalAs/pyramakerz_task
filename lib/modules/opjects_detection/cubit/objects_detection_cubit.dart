@@ -38,8 +38,8 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
 
   Future<void> loadModel() async {
     await Tflite.loadModel(
-      model: "assets/mobilenet_v1_1.0_224.tflite",
-      labels: "assets/mobilenet_v1_1.0_224.txt",
+      model: "assets/model.tflite",
+      labels: "assets/labels.txt",
     );
   }
 
@@ -54,8 +54,7 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
         imageMean: 127.5,
         imageStd: 127.5,
         rotation: 90,
-        numResults: 2,
-        threshold: 0.1,
+        numResults: 1,
         asynch: true,
       );
       result='';
