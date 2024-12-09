@@ -44,8 +44,8 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
   Future<void> loadModel() async {
     try {
       await Tflite.loadModel(
-        model: "assets/model.tflite",
-        labels: "assets/labels.txt",
+        model: "assets/mobilenet_v1_1.0_224.tflite",
+        labels: "assets/mobilenet_v1_1.0_224.txt",
       );
       print("Model loaded successfully.");
     } catch (e) {
