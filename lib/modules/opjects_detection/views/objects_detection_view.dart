@@ -14,17 +14,41 @@ class ObjectsDetectionView extends StatelessWidget {
       create: (context) => ObjectsDetectionCubit(),
       child: BlocBuilder<ObjectsDetectionCubit, ObjectsDetectionState>(
         builder: (context, state) {
-          ObjectsDetectionCubit objectsDetectionState=ObjectsDetectionCubit.get(context);
+          ObjectsDetectionCubit objectsDetectionCubit=ObjectsDetectionCubit.get(context);
           return Scaffold(
             appBar: AppBar(title: const Text('Object Detection')),
             body: Stack(
               children: [
-                objectsDetectionState.imageCamera != null
-                    ? CameraPreview(objectsDetectionState.cameraController)
+                objectsDetectionCubit.imageCamera != null
+                    ? CameraPreview(objectsDetectionCubit.cameraController)
                     : const Center(child: CircularProgressIndicator()),
+                if (state is DetectObjectsState) ...[
+                  for (var recognition in objectsDetectionCubit.recognitionsResults)
+                    Positioned(
+                      left: recognition['x']??0 * MediaQuery.of(context).size.width,
+                      top: recognition['y']??0 * MediaQuery.of(context).size.height,
+                      width: recognition['width']??0 * MediaQuery.of(context).size.width,
+                      height: recognition['height']??0 * MediaQuery.of(context).size.height,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.red,
+                            width: 2.0,
+                          ),
+                        ),
+                        child: Text(
+                          "${recognition['label']} ${(recognition['confidence'] as double).toStringAsFixed(2)}",
+                          style: TextStyle(
+                            color: Colors.red,
+                            backgroundColor: Colors.black54,
+                          ),
+                        ),
+                      ),
+                    ),
+                ],
                 Align(
                     alignment: Alignment.bottomCenter,
-                    child: Text(objectsDetectionState.result))
+                    child: Text(objectsDetectionCubit.result))
               ],
             ),
           );

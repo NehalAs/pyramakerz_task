@@ -16,6 +16,7 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
   bool isWorking = false;
   String result = "";
   late CameraController cameraController;
+   var recognitionsResults;
 
   // Initialize the camera with proper resolution and handle exceptions
   Future<void> initializeCamera() async {
@@ -71,7 +72,11 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
         );
 
         result = '';
+        recognitionsResults=recognitions;
+
         recognitions?.forEach((element) {
+          print('positionnnnnnnnnnnnn');
+          print(element.toString());
           result +=
           "${element["label"]} ${(element["confidence"] as double).toStringAsFixed(2)}\n\n";
           print("Detection: $result");
