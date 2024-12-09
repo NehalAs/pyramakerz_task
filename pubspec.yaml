@@ -14,6 +14,7 @@ dependencies:
   image: ^4.3.0
   image_picker: ^1.1.2
   speech_to_text: ^7.0.0
+  percent_indicator: ^4.2.4
   tflite:
     git:
       url: https://github.com/sumn2u/flutter_tflite.git
