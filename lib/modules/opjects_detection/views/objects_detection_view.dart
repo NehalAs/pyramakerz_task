@@ -22,14 +22,12 @@ class ObjectsDetectionView extends StatelessWidget {
                 objectsDetectionCubit.imageCamera != null
                     ? CameraPreview(objectsDetectionCubit.cameraController)
                     : const Center(child: CircularProgressIndicator()),
-                if (state is DetectObjectsState) ...[
+                if (objectsDetectionCubit.result!='') ...[
                   for (var recognition in objectsDetectionCubit.recognitionsResults)
-                    Positioned(
-                      left: recognition['x']??0 * MediaQuery.of(context).size.width,
-                      top: recognition['y']??0 * MediaQuery.of(context).size.height,
-                      width: recognition['width']??0 * MediaQuery.of(context).size.width,
-                      height: recognition['height']??0 * MediaQuery.of(context).size.height,
+                    Center(
                       child: Container(
+                        width: 0.6 * MediaQuery.of(context).size.width,
+                        height: 0.4 * MediaQuery.of(context).size.height,
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: Colors.red,
