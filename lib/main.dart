@@ -1,10 +1,7 @@
 import 'dart:ui';
-
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:pyramakerz_task_f/modules/speech_recognition/views/speech_recognition_view.dart';
-
-import 'modules/opjects_detection/views/objects_detection_view.dart';
 
 late List<CameraDescription> cameras;
 
