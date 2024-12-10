@@ -11,7 +11,7 @@ class RecognizedWordsWidget extends StatelessWidget {
     return BlocBuilder<SpeechRecognitionCubit, SpeechRecognitionState>(
         builder: (context,state) {
           SpeechRecognitionCubit speechRecognitionCubit = SpeechRecognitionCubit.get(context);
-          return                  Text(
+          return Text(
             speechRecognitionCubit.speechToText.isListening
                 ? speechRecognitionCubit.recognizedWords
                 : speechRecognitionCubit.isSpeechEnabled
