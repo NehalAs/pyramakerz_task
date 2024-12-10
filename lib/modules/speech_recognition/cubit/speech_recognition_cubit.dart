@@ -48,4 +48,6 @@ class SpeechRecognitionCubit extends Cubit<SpeechRecognitionState> {
       }
     },);
   }
+
+
 }

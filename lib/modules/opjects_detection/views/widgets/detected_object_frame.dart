@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pyramakerz_task_f/models/real_time_recognition_model.dart';
+import 'package:pyramakerz_task_f/modules/opjects_detection/models/real_time_recognition_model.dart';
 
 class DetectedObjectFrame extends StatelessWidget {
   const DetectedObjectFrame({super.key, required this.recognition});

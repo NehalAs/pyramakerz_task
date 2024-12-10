@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:pyramakerz_task_f/models/real_time_recognition_model.dart';
+import 'package:pyramakerz_task_f/modules/opjects_detection/models/real_time_recognition_model.dart';
 import 'package:tflite/tflite.dart';
 import '../../../main.dart';
 import 'objects_detection_state.dart';
