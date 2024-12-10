@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:camera/camera.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pyramakerz_task_f/models/real_time_recognition_model.dart';
 import 'package:tflite/tflite.dart';
 import '../../../main.dart';
 import 'objects_detection_state.dart';
@@ -14,9 +17,9 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
 
   CameraImage? imageCamera;
   bool isWorking = false;
-  String result = "";
   late CameraController cameraController;
-   var recognitionsResults;
+  //this model changes according to trained model result format
+  List<RealTimeRecognitionModel>? recognitionsResults;
 
   // Initialize the camera with proper resolution and handle exceptions
   Future<void> initializeCamera() async {
@@ -28,7 +31,6 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
           if (!isWorking) {
             isWorking = true;
             imageCamera = imageFromStream;
-            print('Frame format: ${imageCamera?.format.group}');
             emit(ImageFromStreamState());
             detectObjects();
           }
@@ -36,7 +38,7 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
         emit(InitializeCameraState());
       });
     } catch (e) {
-      print("Camera initialization failed: $e");
+      log("Camera initialization failed: $e");
       emit(CameraErrorState(e.toString()));
     }
   }
@@ -45,12 +47,12 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
   Future<void> loadModel() async {
     try {
       await Tflite.loadModel(
-        model: "assets/mobilenet_v1_1.0_224.tflite",
-        labels: "assets/mobilenet_v1_1.0_224.txt",
+        model: "assets/detect.tflite",
+        labels: "assets/labelmap.txt",
       );
-      print("Model loaded successfully.");
+      log("Model loaded successfully.");
     } catch (e) {
-      print("Failed to load model: $e");
+      log("Failed to load model: $e");
       emit(ModelLoadErrorState(e.toString()));
     }
   }
@@ -59,33 +61,22 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
   Future<void> detectObjects() async {
     if (imageCamera != null) {
       try {
-        var recognitions = await Tflite.runModelOnFrame(
+        List? recognitions = await Tflite.detectObjectOnFrame(
           bytesList: imageCamera!.planes.map((plane) => plane.bytes).toList(),
+          model: "SSDMobileNet",
           imageHeight: imageCamera!.height,
           imageWidth: imageCamera!.width,
-          imageMean: 127.5,
-          imageStd: 127.5,
-          rotation: 90,
-          threshold: 0.5, // Adjust threshold for better accuracy
-          numResults: 3, // Increase for more detailed results
+          threshold: 0.5,
           asynch: true,
         );
-
-        result = '';
-        recognitionsResults=recognitions;
-
-        recognitions?.forEach((element) {
-          print('positionnnnnnnnnnnnn');
-          print(element.toString());
-          result +=
-          "${element["label"]} ${(element["confidence"] as double).toStringAsFixed(2)}\n\n";
-          print("Detection: $result");
-        });
-
+        recognitionsResults =
+            recognitions?.map<RealTimeRecognitionModel>((recognition) {
+          return RealTimeRecognitionModel.fromJson(recognition);
+        }).toList();
         isWorking = false;
         emit(DetectObjectsState());
       } catch (e) {
-        print("Object detection error: $e");
+        log("Object detection error: $e");
         isWorking = false;
         emit(DetectionErrorState(e.toString()));
       }

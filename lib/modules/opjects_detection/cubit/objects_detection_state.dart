@@ -1,4 +1,3 @@
-
 sealed class ObjectsDetectionState {}
 
 final class ObjectsDetectionInitial extends ObjectsDetectionState {}
@@ -22,7 +21,6 @@ final class CameraErrorState extends ObjectsDetectionState {
   late String error;
   CameraErrorState(this.error);
 }
-
 
 final class ModelLoadErrorState extends ObjectsDetectionState {
   late String error;

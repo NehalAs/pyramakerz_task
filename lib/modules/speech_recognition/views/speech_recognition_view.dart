@@ -22,11 +22,10 @@ class SpeechRecognitionView extends StatelessWidget {
               child: SafeArea(
                 child: Column(
                   children: [
-
                     Center(
                         child: CircleAvatar(
-                          radius: 50,
-                          child: Text(speechRecognitionCubit.detectedCommand),
+                      radius: 50,
+                      child: Text(speechRecognitionCubit.detectedCommand),
                     )),
                     const SizedBox(
                       height: 50,
@@ -38,31 +37,44 @@ class SpeechRecognitionView extends StatelessWidget {
                               ? 'Tap the microphone to start listening...'
                               : 'Speech not available',
                     ),
-                    const SizedBox(height: 25,),
+                    const SizedBox(
+                      height: 25,
+                    ),
                     const Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: Text('Commands you can try it')),
-                    const SizedBox(height: 25,),
+                    const SizedBox(
+                      height: 25,
+                    ),
                     const CommandListViewItem(),
                     const Spacer(),
                     Row(
                       children: [
                         FloatingActionButton(
                           shape: const CircleBorder(),
-                          onPressed: speechRecognitionCubit.speechToText.isListening
-                              ? speechRecognitionCubit.stopListening
-                              : speechRecognitionCubit.startListening,
+                          onPressed:
+                              speechRecognitionCubit.speechToText.isListening
+                                  ? speechRecognitionCubit.stopListening
+                                  : speechRecognitionCubit.startListening,
                           child: Icon(
                               speechRecognitionCubit.speechToText.isNotListening
                                   ? Icons.mic_off
                                   : Icons.mic),
                         ),
                         const Spacer(),
-                        ElevatedButton(onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const ObjectsDetectionView(),));}, child: const Text('Objects Detection '),),
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ObjectsDetectionView(),
+                                ));
+                          },
+                          child: const Text('Objects Detection '),
+                        ),
                       ],
                     ),
-
                   ],
                 ),
               ),
