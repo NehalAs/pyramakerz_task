@@ -8,7 +8,7 @@ class CommandListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SpeechRecognitionCubit speechRecognitionCubit=SpeechRecognitionCubit.get(context);
-    return   Expanded(
+    return Expanded(
         child: ListView.builder(
           padding: EdgeInsets.zero,
           itemBuilder: (context, index) =>

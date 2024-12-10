@@ -4,6 +4,8 @@ import 'package:pyramakerz_task_f/modules/opjects_detection/views/objects_detect
 import 'package:pyramakerz_task_f/modules/speech_recognition/cubit/speach_recognition_state.dart';
 import 'package:pyramakerz_task_f/modules/speech_recognition/cubit/speech_recognition_cubit.dart';
 import 'package:pyramakerz_task_f/modules/speech_recognition/views/widgets/command_list_view_item.dart';
+import 'package:pyramakerz_task_f/modules/speech_recognition/views/widgets/detected_command_widget.dart';
+import 'package:pyramakerz_task_f/modules/speech_recognition/views/widgets/recognized_words_widget.dart';
 
 class SpeechRecognitionView extends StatelessWidget {
   const SpeechRecognitionView({super.key});
@@ -22,21 +24,11 @@ class SpeechRecognitionView extends StatelessWidget {
               child: SafeArea(
                 child: Column(
                   children: [
-                    Center(
-                        child: CircleAvatar(
-                      radius: 50,
-                      child: Text(speechRecognitionCubit.detectedCommand),
-                    )),
+                    DetectedCommandWidget(),
                     const SizedBox(
                       height: 50,
                     ),
-                    Text(
-                      speechRecognitionCubit.speechToText.isListening
-                          ? speechRecognitionCubit.recognizedWords
-                          : speechRecognitionCubit.isSpeechEnabled
-                              ? 'Tap the microphone to start listening...'
-                              : 'Speech not available',
-                    ),
+                    RecognizedWordsWidget(),
                     const SizedBox(
                       height: 25,
                     ),
