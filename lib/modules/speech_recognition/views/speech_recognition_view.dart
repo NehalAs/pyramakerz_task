@@ -6,6 +6,7 @@ import 'package:pyramakerz_task_f/modules/speech_recognition/cubit/speech_recogn
 import 'package:pyramakerz_task_f/modules/speech_recognition/views/widgets/command_list_view_item.dart';
 import 'package:pyramakerz_task_f/modules/speech_recognition/views/widgets/detected_command_widget.dart';
 import 'package:pyramakerz_task_f/modules/speech_recognition/views/widgets/recognized_words_widget.dart';
+import 'package:pyramakerz_task_f/services/mqtt_service.dart';
 
 class SpeechRecognitionView extends StatelessWidget {
   const SpeechRecognitionView({super.key});
@@ -39,6 +40,12 @@ class SpeechRecognitionView extends StatelessWidget {
                       height: 25,
                     ),
                     const CommandListViewItem(),
+                    SizedBox(height: 30,),
+                    Text('Listening from broker',style: TextStyle(fontWeight: FontWeight.bold),),
+                    CircleAvatar(radius: 60,child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(speechRecognitionCubit.listenedStringMessage,textAlign: TextAlign.center,),
+                    ),),
                     const Spacer(),
                     Row(
                       children: [
@@ -62,6 +69,7 @@ class SpeechRecognitionView extends StatelessWidget {
                                   builder: (context) =>
                                       const ObjectsDetectionView(),
                                 ));
+
                           },
                           child: const Text('Objects Detection '),
                         ),

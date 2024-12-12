@@ -11,3 +11,9 @@ final class StartListeningState extends SpeechRecognitionState {}
 final class StopListeningState extends SpeechRecognitionState {}
 
 final class DetectCommandState extends SpeechRecognitionState {}
+
+final class ListenMessageState extends SpeechRecognitionState {}
+
+final class PublishMessageState extends SpeechRecognitionState {}
+
+final class ConnectToBrokerState extends SpeechRecognitionState {}
