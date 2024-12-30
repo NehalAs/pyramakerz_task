@@ -18,6 +18,7 @@ class ObjectsDetectionCubit extends Cubit<ObjectsDetectionState> {
   CameraImage? imageCamera;
   bool isWorking = false;
   late CameraController cameraController;
+
   //this model changes according to trained model result format
   List<RealTimeRecognitionModel>? recognitionsResults;
 
